@@ -23,11 +23,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 =========================================================================
- File: pi.hs_redirect.php V1.0.0
+ File: pi.hs_redirect.php V1.0.1
 -------------------------------------------------------------------------
  Purpose: Redirects current EE template to a given location.
 =========================================================================
 CHANGE LOG :
+
+January 20, 2011
+	- Version 1.0.1
+	- Fixed bug that caused the plugin to do nothing when logged_in param
+	  wasn't included. Weird bug, frankly. Not sure how I missed that.
 
 October 26, 2010
 	- Version 1.0.0
@@ -37,18 +42,19 @@ October 26, 2010
 
 $plugin_info = array(
 						'pi_name'			=> 'HS Redirect',
-						'pi_version'		=> '1.0.0',
+						'pi_version'		=> '1.0.1',
 						'pi_author'			=> 'Kevin Smith',
 						'pi_author_url'		=> 'http://www.gohearsay.com/',
 						'pi_description'	=> 'Redirects current EE template to a given location.',
 						'pi_usage'			=> Hs_redirect::usage()
 					);
 
-class Hs_redirect {
+class Hs_redirect
+{
 
     var $return_data = '';
 
-	function Hs_redirect() 
+	function hs_redirect()
 	{
 		$this->EE =& get_instance();
 		
@@ -73,6 +79,10 @@ class Hs_redirect {
 		{
 			$logged_in = ($this->EE->session->userdata('member_id') != 0) ? FALSE : TRUE; 
 		}
+		else
+		{
+			$logged_in = TRUE;
+		}
 		
 		// Is this a full URL?
 		if (strpos($location, 'http') !== 0 AND !(strpos($location, 'http') > 0)) 
@@ -93,9 +103,9 @@ class Hs_redirect {
 		{
 			$member_group = TRUE;
 		}
-		
+
 		if ($member_group === TRUE AND $logged_in === TRUE)
-		{
+		{		
 			// Perform a check to see if method parameter supplied
 			if ($method === FALSE)
 			{
@@ -167,4 +177,6 @@ return $buffer;
 // END
 }
 // END CLASS
-?>
+
+/* End of file pi.hs_redirect.php */
+/* Location: ./system/expressionengine/third_party/hs_redirect/pi.hs_redirect.php */
