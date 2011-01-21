@@ -3,7 +3,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /*
 =========================================================================
-Copyright (c) 2010 Kevin Smith <kevin@gohearsay.com>
+Copyright (c) 2011 Kevin Smith <kevin@gohearsay.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
